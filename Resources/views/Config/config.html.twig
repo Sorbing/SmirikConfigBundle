@@ -6,19 +6,23 @@
 <form id="form-config" class="form-config" action="{{ path('admin_config') }}" method="post">
 {% for config in configs %}
   {% if config.type == 'input' %}
-    {{ forms.input(config.key, config.title, config.value, null, config.id) }}
+    {{ forms.input(config) }}
   {% endif %}
   
   {% if config.type == 'textarea' %}
-    {{ forms.textarea(config.key, config.title, config.value, config.id) }}
+    {{ forms.textarea(config) }}
   {% endif %}
   
   {% if config.type == 'checkbox' %}
-    {{ forms.checkbox(config.key, config.title, config.value, config.id) }}
+    {{ forms.checkbox(config) }}
   {% endif %}
 {% else %}
-  No user have been found.
+  Нет полей для отображения
 {% endfor %}
-<button class="btn btn-primary" type="submit">Сохранить</button>
+<div>
+  <button class="btn btn-primary" type="submit">Сохранить</button>
+</div>
+{{ test }}
+
 </form>
 {% endblock %}
