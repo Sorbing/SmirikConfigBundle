@@ -1,13 +1,13 @@
 <database name="default" namespace="Smirik\ConfigBundle\Model" defaultIdMethod="native">
   <table name="configs" phpName="Config">
     <column name="id" type="integer" primaryKey="true" autoIncrement="true" required="true"/>
-    <column name="pid" type="integer"/>
+    <column name="pid" type="integer" required="false" />
     <column name="title" type="varchar" size="200" required="false" />
     <column name="key" type="varchar" size="200" required="true" />
     <column name="value" type="longvarchar" required="true" />
     <column name="type" type="varchar" size="20" required="true" />
     <foreign-key foreignTable="configs">
-        <reference local="pid" foreign="id" required="false"/>
+        <reference local="pid" foreign="id" />
     </foreign-key>
   </table>
 </database>

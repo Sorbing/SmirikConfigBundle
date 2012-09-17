@@ -1,3 +1,0 @@
-smirik_config_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: SmirikConfigBundle:Default:index }

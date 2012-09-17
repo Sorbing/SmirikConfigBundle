@@ -1,6 +1,6 @@
 parameters:
-#    smirik_config.example.class: Smirik\ConfigBundle\Example
+  smirik.config.class: Smirik\ConfigBundle\Config\Config
 
 services:
-    config:
-        class: Smirik\ConfigBundle\Model\ConfigManager
+  config:
+    class: Smirik\ConfigBundle\Config\Config
