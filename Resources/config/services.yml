@@ -2,6 +2,5 @@ parameters:
 #    smirik_config.example.class: Smirik\ConfigBundle\Example
 
 services:
-#    smirik_config.example:
-#        class: %smirik_config.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    config:
+        class: Smirik\ConfigBundle\Model\ConfigManager

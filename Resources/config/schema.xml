@@ -7,7 +7,7 @@
     <column name="value" type="longvarchar" required="true" />
     <column name="type" type="varchar" size="20" required="true" />
     <foreign-key foreignTable="configs">
-        <reference local="pid" foreign="id" />
+        <reference local="pid" foreign="id" required="false"/>
     </foreign-key>
   </table>
 </database>
