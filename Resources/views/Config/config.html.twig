@@ -1,0 +1,24 @@
+{% extends 'SmirikTurprofiBundle::layout.html.twig' %}
+
+{% import 'SmirikConfigBundle:Config:forms.html.twig' as forms %}
+
+{% block content %}
+<form id="form-config" class="form-config" action="{{ path('admin_config') }}" method="post">
+{% for config in configs %}
+  {% if config.type == 'input' %}
+    {{ forms.input(config.key, config.title, config.value, null, config.id) }}
+  {% endif %}
+  
+  {% if config.type == 'textarea' %}
+    {{ forms.textarea(config.key, config.title, config.value, config.id) }}
+  {% endif %}
+  
+  {% if config.type == 'checkbox' %}
+    {{ forms.checkbox(config.key, config.title, config.value, config.id) }}
+  {% endif %}
+{% else %}
+  No user have been found.
+{% endfor %}
+<button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+{% endblock %}

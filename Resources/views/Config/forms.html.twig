@@ -1,0 +1,14 @@
+{% macro input(key, label, value, type, id, size) %}
+  <label for="config[{{ id }}][{{ key }}]">{{ label }}</label>
+  <input type="{{ type|default('text') }}" name="config[{{ id }}][{{ key }}]" value="{{ value|e }}" size="{{ size|default(20) }}" id="{{ id }}" />
+{% endmacro %}
+
+{% macro textarea(key, label, value, id, rows) %}
+  <label for="config[{{ id }}][{{ key }}]">{{ label }}</label>
+  <textarea name="config[{{ id }}][{{ key }}]" rows="{{ rows|default(10) }}" cols="{{ cols|default(40) }}" id="{{ id }}">{{ value|e }}</textarea>
+{% endmacro %}
+
+{% macro checkbox(key, label, value, id) %}
+  <label for="config[{{ id }}][{{ key }}]">{{ label }}</label>
+  <input type="checkbox" name="config[{{ id }}][{{ key }}]" value="{{ value|e }}" {% if value %}checked{% endif %}>
+{% endmacro %}
