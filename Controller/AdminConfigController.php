@@ -34,7 +34,6 @@ class AdminConfigController extends Controller
         if (!$config) {
           throw $this->createNotFoundException('ConfigBundle: поле не найдено: '.$id);
         }
-        $test .= $id . " - " . $value . "<br />";
         $config->setValue($value);
         $config->save();
       }
@@ -42,7 +41,6 @@ class AdminConfigController extends Controller
 
     return array(
       'configs' => $configs,
-      'test'=>$test,
     );
   }
 }
