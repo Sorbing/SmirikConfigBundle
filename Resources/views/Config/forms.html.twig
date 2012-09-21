@@ -1,15 +1,19 @@
 {% macro input(config) %}
   <label for="config[{{ config.id }}]">{{ config.title }}</label>
-  <input type="text" name="config[{{ config.id }}]" value="{{ config.value|e }}" size="20" id="{{ config.id }}_{{ config.key }}" />
+  <input type="text" name="config[{{ config.id }}]" value="{{ config.value|e }}" size="20" id="{{ config.key }}" />
 {% endmacro %}
 
 {% macro textarea(config) %}
   <label for="config[{{ config.id }}]">{{ config.title }}</label>
-  <textarea name="config[{{ config.id }}]" rows="{{ rows|default(10) }}" cols="40" id="{{ config.id }}_{{ config.key }}">{{ config.value|e }}</textarea>
+  <textarea name="config[{{ config.id }}]" rows="{{ rows|default(20) }}" id="{{ config.key }}" class="input-xxlarge">{{ config.value|e }}</textarea>
 {% endmacro %}
 
 {% macro checkbox(config) %}
   <label for="config[{{ config.id }}]">{{ config.title }}</label>
-  <input type="hidden" name="config[{{ config.id }}]" value="" id="checkbox">
+  <input type="hidden" name="config[{{ config.id }}]" value="" id="{{ config.key }}">
   <input type="checkbox" name="config[{{ config.id }}]" value="on" {% if config.value %}checked{% endif %}>
+{% endmacro %}
+
+{% macro delimeter(config) %}
+  <label for="config[{{ config.id }}]"><strong>{{ config.title }}:</strong></label>
 {% endmacro %}

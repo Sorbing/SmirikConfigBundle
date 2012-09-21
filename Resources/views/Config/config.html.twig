@@ -16,6 +16,10 @@
   {% if config.type == 'checkbox' %}
     {{ forms.checkbox(config) }}
   {% endif %}
+  
+  {% if config.type == 'delimeter' %}
+    {{ forms.delimeter(config) }}
+  {% endif %}
 {% else %}
   Нет полей для отображения
 {% endfor %}
