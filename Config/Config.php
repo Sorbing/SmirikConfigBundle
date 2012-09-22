@@ -39,6 +39,16 @@ class Config
     return $keyReturn;
   }
   
+  public function getValue($key)
+  {
+    $obj = $this->get($key);
+    if (!$obj)
+    {
+      return false;
+    }
+    return $obj->getValue();
+  }
+  
 	/**
 	 * Get Config related to key & pid
 	 * @param string $key
