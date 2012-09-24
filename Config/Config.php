@@ -39,12 +39,35 @@ class Config
     return $keyReturn;
   }
   
+  /**
+   * Get raw value of config instead of Config object
+   * @param string $key
+   * @return mixed value
+   */
   public function getValue($key)
   {
     $obj = $this->get($key);
     if (!$obj)
     {
       return false;
+    }
+    return $obj->getValue();
+  }
+  
+  /**
+   * Get raw value of config. If not exists -> creates it
+   * @param string $key
+   * @param mixed $value
+   * @param string $type
+   * @return mixed
+   */
+  public function getValueOrCreate($key, $value = null, $type = null)
+  {
+    $obj = $this->get($key);
+    if (!$obj)
+    {
+      $obj = $this->set($key, $value, $type, true);
+      return $obj->getValue();
     }
     return $obj->getValue();
   }
@@ -75,7 +98,7 @@ class Config
 	 * @param boolean $create_if_not_exists
 	 * @return Smirik\ConfigBundle\Model\Config
 	 */
-	public function set($key, $value, $create_if_not_exists = true)
+	public function set($key, $value, $type = 'text', $create_if_not_exists = true)
 	{
 		$keys = explode('.', $key);
 		
@@ -94,6 +117,7 @@ class Config
 			$first->setKey($keys[0]);
 			if (count($keys) == 1)
 			{
+				$first->setType($type);
 				$first->setValue($value);
 			} else
 			{
@@ -128,8 +152,10 @@ class Config
 			$first = $new;
 		}
 		
+		$first->setType($type);
 		$first->setValue($value);
 		$first->save();
+		return $first;
 	}
 
 }
