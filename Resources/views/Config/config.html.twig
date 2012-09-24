@@ -1,9 +1,9 @@
-{% extends 'SmirikTurprofiBundle::layout.html.twig' %}
+{% extends 'SmirikTurprofiBundle:Admin:layout.html.twig' %}
 
 {% import 'SmirikConfigBundle:Config:forms.html.twig' as forms %}
 
 {% block content %}
-<form id="form-config" class="form-config" action="{{ path('admin_config') }}" method="post">
+<form id="form-config" class="form-config form-horizontal" action="{{ path('admin_config') }}" method="post">
 {% for config in configs %}
   {% if config.type == 'input' %}
     {{ forms.input(config) }}
