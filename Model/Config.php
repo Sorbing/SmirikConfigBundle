@@ -21,7 +21,13 @@ class Config extends BaseConfig
     $value = parent::getValue();
     if (in_array($this->getType(), array('array')))
     {
-      return (array)json_decode($value);
+      $arr = json_decode($value);
+      $new_arr = array();
+      foreach ($arr as $key => $value)
+      {
+        $new_arr[(int)$key] = $value;
+      }
+      return $new_arr;
     }
     return $value;
   }
