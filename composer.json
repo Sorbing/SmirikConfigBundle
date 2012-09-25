@@ -1,0 +1,32 @@
+{
+    "name": "smirik/config-bundle",
+    "description": "Powerful config bundle.",
+    "keywords": ["config", "admin"],
+    "homepage": "https://4xxi.com",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evgeny Smirnov",
+            "email": "smirik@gmail.com",
+            "homepage": "http://4xxi.com"
+        }
+    ],
+    "require": {
+      "symfony/framework-bundle": "2.*",
+      "propel/propel-bundle": "1.1.*",
+      "willdurand/propel-typehintable-behavior": "*",
+      "smirik/bootstrap-bundle": "*"
+    },
+    "suggest": {
+      "friendsofsymfony/user-bundle": "*",
+      "avalanche123/imagine-bundle": "*",
+      "imagine/Imagine": "*",
+      "knplabs/knp-menu-bundle": "*",
+      "knplabs/knp-menu": "2.0.*"
+    },
+    "autoload": {
+        "psr-0": { "Smirik\\ConfigBundle": "" }
+    },
+    "target-dir": "Smirik/ConfigBundle"
+}
