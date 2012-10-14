@@ -24,7 +24,7 @@ class AdminConfigController extends Controller
   public function adminAction(Request $request)
   {
     $test = '';
-    $configs = ConfigQuery::create()->find();
+    $configs = ConfigQuery::create()->filterByPid(null)->filterByIsVisible(true)->find();
     if ($request->getMethod() == 'POST')
     {
       $configsData = $this->get('request')->request->get('config');
