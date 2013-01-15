@@ -3,14 +3,17 @@
 {% import 'SmirikConfigBundle:Config:forms.html.twig' as forms %}
 
 {% block javascripts %}
-	{% javascripts
-      '@SmirikTurprofiBundle/Resources/public/js/clickToShow.jquery.js'
-  %}
-     <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
+	{#{% javascripts#}
+      {#'@SmirikTurprofiBundle/Resources/public/js/clickToShow.jquery.js'#}
+  {#%}#}
+     {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+  {#{% endjavascripts %}#}
   <script language="JavaScript">
 	$(document).ready(function (e) {
-    $('.click-to-show').clicktoshow();
+    $('#config-nav-list a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
   });
   </script>
 {% endblock %}
@@ -20,39 +23,42 @@
 <div class="row">
   <div class="span4">
     <div class="well">
-      <ul class="nav nav-list">
+      <ul id="config-nav-list" class="nav nav-list">
         <li class="nav-header">{{ 'Настройки'|trans }}</li>
         {% for config in configs %}
-          <li><a href="#config_group_{{ config.id }}" class="link_config_group click-to-show">{{ config.title }}</a></li>
+          <li class="{% if loop.first %}active{% endif %}"><a href="#config_group_{{ config.id }}" class="link_config_group click-to-show">{{ config.title }}</a></li>
         {% endfor %}
       </ul>
     </div>
   </div>
   <div class="span8">
     <form id="form-config" class="form-config form-horizontal" action="{{ path('admin_config') }}" method="post">
-    {% for item in configs %}
-      <div id="config_group_{{ item.id }}" class="config-group hide" data-show="config_group_{{ item.id }}">
-        {% for config in item.getConfigsRelatedById %}
-          {% if config.type == 'input' %}
-            {{ forms.input(config) }}
-          {% endif %}
+    <div class="tab-content">
+      {% for item in configs %}
+        <div id="config_group_{{ item.id }}" class="config-group tab-pane {% if loop.first %}active{% endif %}" data-show="config_group_{{ item.id }}">
+          {% for config in item.getConfigsRelatedById %}
+            {% if config.type == 'input' %}
+              {{ forms.input(config) }}
+            {% endif %}
 
-          {% if config.type == 'textarea' %}
-            {{ forms.textarea(config) }}
-          {% endif %}
+            {% if config.type == 'textarea' %}
+              {{ forms.textarea(config) }}
+            {% endif %}
 
-          {% if config.type == 'checkbox' %}
-            {{ forms.checkbox(config) }}
-          {% endif %}
+            {% if config.type == 'checkbox' %}
+              {{ forms.checkbox(config) }}
+            {% endif %}
 
-          {% if config.type == 'delimiter' %}
-            {{ forms.delimiter(config) }}
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% else %}
-      Нет полей для отображения
-    {% endfor %}
+            {% if config.type == 'delimiter' %}
+              {{ forms.delimiter(config) }}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        Нет полей для отображения
+      {% endfor %}
+    </div>
+
     <div>
       <button class="btn btn-primary" type="submit">Сохранить</button>
     </div>
