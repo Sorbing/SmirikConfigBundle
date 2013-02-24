@@ -1,6 +1,12 @@
 parameters:
-  smirik.config.class: Smirik\ConfigBundle\Config\Config
+    smirik.config.class: Smirik\ConfigBundle\Config\Config
 
 services:
-  config:
-    class: Smirik\ConfigBundle\Config\Config
+    config:
+        class: Smirik\ConfigBundle\Config\Config
+    smirik.config.twig.extension:
+        class: Smirik\ConfigBundle\Twig\Extension\ConfigExtension
+        calls:
+            - [ setConfig, ["@config"] ]
+        tags:
+            - { name: twig.extension }

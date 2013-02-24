@@ -1,70 +1,67 @@
-{% extends 'SmirikTurprofiBundle:Admin:layout.html.twig' %}
+{% extends 'config.layout'|config('::base.html.twig') %}
 
 {% import 'SmirikConfigBundle:Config:forms.html.twig' as forms %}
 
 {% block javascripts %}
-	{#{% javascripts#}
-      {#'@SmirikTurprofiBundle/Resources/public/js/clickToShow.jquery.js'#}
-  {#%}#}
-     {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
-  {#{% endjavascripts %}#}
-  <script language="JavaScript">
-	$(document).ready(function (e) {
-    $('#config-nav-list a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    })
-  });
-  </script>
+    <script language="JavaScript">
+        $(document).ready(function (e) {
+            $('#config-nav-list a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+        });
+    </script>
 {% endblock %}
 
-{% block content %}
+{% block body %}
 
-<div class="row">
-  <div class="span4">
-    <div class="well">
-      <ul id="config-nav-list" class="nav nav-list">
-        <li class="nav-header">{{ 'Настройки'|trans }}</li>
-        {% for config in configs %}
-          <li class="{% if loop.first %}active{% endif %}"><a href="#config_group_{{ config.id }}" class="link_config_group click-to-show">{{ config.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-  <div class="span8">
-    <form id="form-config" class="form-config form-horizontal" action="{{ path('admin_config') }}" method="post">
-    <div class="tab-content">
-      {% for item in configs %}
-        <div id="config_group_{{ item.id }}" class="config-group tab-pane {% if loop.first %}active{% endif %}" data-show="config_group_{{ item.id }}">
-          {% for config in item.getConfigsRelatedById %}
-            {% if config.type == 'input' %}
-              {{ forms.input(config) }}
-            {% endif %}
-
-            {% if config.type == 'textarea' %}
-              {{ forms.textarea(config) }}
-            {% endif %}
-
-            {% if config.type == 'checkbox' %}
-              {{ forms.checkbox(config) }}
-            {% endif %}
-
-            {% if config.type == 'delimiter' %}
-              {{ forms.delimiter(config) }}
-            {% endif %}
-          {% endfor %}
+    <div class="row">
+        <div class="span4">
+            <div class="well">
+                <ul id="config-nav-list" class="nav nav-list">
+                    <li class="nav-header">{{ 'Settings'|trans }}</li>
+                    {% for config in configs %}
+                        <li class="{% if loop.first %}active{% endif %}"><a href="#config_group_{{ config.id }}" class="link_config_group click-to-show">{{ config.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-      {% else %}
-        Нет полей для отображения
-      {% endfor %}
-    </div>
+        <div class="span8">
+            <form id="form-config" class="form-config form-horizontal" action="{{ path('admin_config_index') }}" method="post">
+                <div class="tab-content">
+                    {% for item in configs %}
+                        <div id="config_group_{{ item.id }}" class="config-group tab-pane {% if loop.first %}active{% endif %}" data-show="config_group_{{ item.id }}">
 
-    <div>
-      <button class="btn btn-primary" type="submit">Сохранить</button>
+                            {% for config in item.getConfigsRelatedById %}
+                                {% if config.type == 'string' %}
+                                    {{ forms.input(config) }}
+                                {% endif %}
+
+                                {% if config.type == 'text' %}
+                                    {{ forms.textarea(config) }}
+                                {% endif %}
+
+                                {% if config.type == 'boolean' %}
+                                    {{ forms.checkbox(config) }}
+                                {% endif %}
+
+                                {% if config.type == 'delimiter' %}
+                                    {{ forms.delimiter(config) }}
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </div>
+                    {% else %}
+                        {{  'Nothing to show'|trans }}
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}</button>
+                </div>
+            </form>
+        </div>
+
     </div>
-    </form>
-  </div>
-  
-</div>
 
 {% endblock %}

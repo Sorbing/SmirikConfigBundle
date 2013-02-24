@@ -1,31 +1,34 @@
 {% macro input(config) %}
-  <div class="control-group">
-    <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
-    <div class="controls">
-      <input type="text" name="config[{{ config.id }}]" value="{{ config.value|e }}" size="20" id="{{ config.key }}" />
+    <div class="control-group">
+        <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
+
+        <div class="controls">
+            <input type="text" name="config[{{ config.id }}]" value="{{ config.value|e }}" size="20" id="{{ config.key }}"/>
+        </div>
     </div>
-  </div>
 {% endmacro %}
 
 {% macro textarea(config) %}
-  <div class="control-group">
-    <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
-    <div class="controls">
-      <textarea name="config[{{ config.id }}]" rows="{{ rows|default(20) }}" id="{{ config.key }}" class="input-xxlarge">{{ config.value|e }}</textarea>
+    <div class="control-group">
+        <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
+
+        <div class="controls">
+            <textarea name="config[{{ config.id }}]" rows="{{ rows|default(20) }}" id="{{ config.key }}" class="input-xxlarge">{{ config.value|e }}</textarea>
+        </div>
     </div>
-  </div>
 {% endmacro %}
 
 {% macro checkbox(config) %}
-  <div class="control-group">
-    <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
-    <div class="controls">
-      <input type="hidden" name="config[{{ config.id }}]" value="" id="{{ config.key }}">
-      <input type="checkbox" name="config[{{ config.id }}]" value="on" {% if config.value %}checked{% endif %}>
+    <div class="control-group">
+        <label class="control-label" for="config[{{ config.id }}]">{{ config.title }}</label>
+
+        <div class="controls">
+            <input type="hidden" name="config[{{ config.id }}]" value="" id="{{ config.key }}">
+            <input type="checkbox" name="config[{{ config.id }}]" value="on" {% if config.value %}checked{% endif %}>
+        </div>
     </div>
-  </div>
 {% endmacro %}
 
 {% macro delimiter(config) %}
-<h4>{{ config.title }}:</h4>
+    <h4>{{ config.title }}:</h4>
 {% endmacro %}
