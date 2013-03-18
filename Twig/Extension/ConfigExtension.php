@@ -6,6 +6,7 @@ class ConfigExtension extends \Twig_Extension
 {
     
     protected $config;
+    protected $configs;
     
     public function getFilters()
     {

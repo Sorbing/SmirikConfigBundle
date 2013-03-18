@@ -35,6 +35,17 @@ class Config
     }
 
     /**
+     * Get all configs in the app
+     * @return PropelObjectCollection
+     */
+    public function getAll()
+    {
+        return ConfigQuery::create()
+            ->find()
+        ;
+    }
+    
+    /**
      * Get raw value of config instead of Config object
      * @param string $key
      * @return mixed value
