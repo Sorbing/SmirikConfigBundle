@@ -30,23 +30,28 @@
             <form id="form-config" class="form-config form-horizontal" action="{{ path('admin_config_index') }}" method="post">
                 <div class="tab-content">
                     {% for item in configs %}
-                        <div id="config_group_{{ item.id }}" class="config-group tab-pane {% if loop.first %}active{% endif %}" data-show="config_group_{{ item.id }}">
+                        <div id="config_group_{{ item.id }}"
+                             class="config-group tab-pane {% if loop.first %}active{% endif %}"
+                             data-show="config_group_{{ item.id }}">
 
                             {% for config in item.getConfigsRelatedById %}
-                                {% if config.type == 'string' %}
-                                    {{ forms.input(config) }}
-                                {% endif %}
+                                {% if config.isVisible %}
 
-                                {% if config.type == 'text' %}
-                                    {{ forms.textarea(config) }}
-                                {% endif %}
+                                    {% if config.type == 'string' %}
+                                        {{ forms.input(config) }}
+                                    {% endif %}
 
-                                {% if config.type == 'boolean' %}
-                                    {{ forms.checkbox(config) }}
-                                {% endif %}
+                                    {% if config.type == 'text' %}
+                                        {{ forms.textarea(config) }}
+                                    {% endif %}
 
-                                {% if config.type == 'delimiter' %}
-                                    {{ forms.delimiter(config) }}
+                                    {% if config.type == 'boolean' %}
+                                        {{ forms.checkbox(config) }}
+                                    {% endif %}
+
+                                    {% if config.type == 'delimiter' %}
+                                        {{ forms.delimiter(config) }}
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                             
