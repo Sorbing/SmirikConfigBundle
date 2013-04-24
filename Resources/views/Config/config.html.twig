@@ -34,7 +34,7 @@
                              class="config-group tab-pane {% if loop.first %}active{% endif %}"
                              data-show="config_group_{{ item.id }}">
 
-                            {% for config in item.getConfigsRelatedById %}
+                            {% for config in item.getSiblingsOrderedByRank %}
                                 {% if config.isVisible %}
 
                                     {% if config.type == 'string' %}

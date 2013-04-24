@@ -7,6 +7,7 @@
     <column name="value" type="longvarchar" required="true" />
     <column name="type" type="varchar" size="20" required="true" />
     <column name="is_visible" type="boolean" required="false" default="true" />
+    <column name="rank" type="integer" required="false" default="0" />
     <foreign-key foreignTable="configs">
         <reference local="pid" foreign="id" />
     </foreign-key>

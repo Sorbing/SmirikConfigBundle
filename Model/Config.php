@@ -2,10 +2,20 @@
 
 namespace Smirik\ConfigBundle\Model;
 
-use Smirik\ConfigBundle\Model\om\BaseConfig;
+use Smirik\ConfigBundle\Model\om\BaseConfig,
+    Doctrine\Common\Collections\Criteria;
 
 class Config extends BaseConfig
 {
+
+    public function getSiblingsOrderedByRank($order = Criteria::ASC)
+    {
+        return ConfigQuery::create()
+            ->filterByPid($this->getId())
+            ->filterByIsVisible(true)
+            ->orderByRank($order)
+            ->find();
+    }
 
     /**
      * saves value & encodes complex values into json respresentation

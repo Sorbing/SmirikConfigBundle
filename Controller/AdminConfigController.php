@@ -25,7 +25,11 @@ class AdminConfigController extends Controller
         /**
          * root configs
          */
-        $configs = ConfigQuery::create()->filterByPid(null)->filterByIsVisible(true)->find();
+        $configs = ConfigQuery::create()
+            ->filterByPid(null)
+            ->filterByIsVisible(true)
+            ->orderByRank()
+            ->find();
         
         if ($request->getMethod() == 'POST') {
             $configsData = $this->get('request')->request->get('config');
